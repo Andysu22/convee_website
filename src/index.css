@@ -1,119 +1,59 @@
 @import "tailwindcss";
-@import url('httpsqy://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Instrument+Sans:wght@400;500;600;700&display=swap');
 
+/* --- BASIS SETUP --- */
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  background-color: #020617; /* Slate 950 - wirk weicher als Schwarz */
-  color: #f8fafc;
+  /* Ein sehr tiefes, fast schwarzes Grau (Business Charcoal) */
+  background-color: #0c0e12; 
+  color: #F8FAFC; 
   color-scheme: dark;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-/* Die Pipeline-Animation für das "Geile" Feature */
-@keyframes moveXt {
-  0% { left: 0%; opacity: 0; }
-  10% { opacity: 1; }
-  90% { opacity: 1; }
-  100% { left: 100%; opacity: 0; }
-}
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
 }
 
 body {
   margin: 0;
-  /* System-Fonts sind oft die seriösesten (wie bei Apple/Linear) */
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  /* Instrument Sans ist sehr technisch und modern, Manrope für Zahlen */
+  font-family: 'Instrument Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
-  background-color: #020617; /* Slate 950 */
-  color: #e2e8f0; /* Slate 200 */
+  background-color: #0c0e12;
+  /* Extrem dezentes Raster */
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
   overflow-x: hidden;
 }
-html {
-  scroll-behavior: smooth;
+
+/* --- TYPOGRAFIE --- */
+h1, h2, h3, button { letter-spacing: -0.01em; }
+.font-numbers { font-family: 'Manrope', sans-serif; }
+
+/* --- BUTTONS --- */
+button { cursor: pointer; border: none; outline: none; }
+
+/* --- SCROLLBAR --- */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #0c0e12; }
+::-webkit-scrollbar-thumb { background: #27272a; border-radius: 4px; border: 1px solid #0c0e12; }
+
+/* --- ANIMATIONEN --- */
+
+/* Sanftes Einblenden der Timeline-Elemente */
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
 }
-h1, h2, h3, h4, h5, h6, button {
-  font-family: 'Outfit', sans-serif; /* Moderne Schrift für Überschriften */
+.animate-slide-in {
+  animation: slideInLeft 0.5s ease-out forwards;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
+/* Pulsierender Indikator für "Live"-Status */
+@keyframes pulse-amber {
+  0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(245, 158, 11, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
 }
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+.pulse-status {
+  animation: pulse-amber 2s infinite;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
-/* Weiche Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background: #020617;
-}
-::-webkit-scrollbar-thumb {
-  background: #334155;
-  border-radius: 4px;
-}
-
-/* Neue, moderne Animation für den Datenfluss */
-@keyframes flow {
-  0% { transform: translateX(-100%); opacity: 0; }
-  50% { opacity: 1; }
-  100% { transform: translateX(100%); opacity: 0; }
-}
-
-.animate-flow {
-  animation: flow 3s infinite cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.gradient-text {
-  background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* Hilfsklassen für Animationen */
-@keyframes slide-in-from-top {
-  from { transform: translateY(-10px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
-
-.animate-in {
-  animation: slide-in-from-top 0.2s ease-out forwards;
-}
-
+html { scroll-behavior: smooth; }
